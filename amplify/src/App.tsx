@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import './config/amplify';
+import { CustomAuthenticator } from './components/Auth/CustomAuthenticator';
 
 import Layout from './components/Layout/Layout';
 import Dashboard from './pages/Dashboard';
@@ -41,22 +41,20 @@ function App() {
 
   // Production mode with AWS authentication
   return (
-    <Authenticator>
-      {() => (
-        <Router>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/documents" element={<Documents />} />
-              <Route path="/upload" element={<Upload />} />
-              <Route path="/chat" element={<Chat />} />
-              <Route path="/settings" element={<div>Settings coming soon...</div>} />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </Layout>
-        </Router>
-      )}
-    </Authenticator>
+    <CustomAuthenticator>
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/documents" element={<Documents />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/settings" element={<div>Settings coming soon...</div>} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </CustomAuthenticator>
   );
 }
 
