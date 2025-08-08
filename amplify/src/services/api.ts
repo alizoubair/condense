@@ -43,7 +43,7 @@ export const documentApi = {
     const params = new URLSearchParams();
     params.append('limit', limit.toString());
     if (lastKey) params.append('lastKey', lastKey);
-    
+
     const response = await apiClient.get(`/documents?${params}`);
     return {
       documents: response.data.documents,
@@ -82,13 +82,13 @@ export class ChatWebSocket {
     private onError: (error: any) => void,
     private onConnect: () => void,
     private onDisconnect: () => void
-  ) {}
+  ) { }
 
   async connect(): Promise<void> {
     try {
       const session = await fetchAuthSession();
       const token = session.tokens?.idToken?.toString();
-      
+
       const wsUrl = process.env.REACT_APP_WEBSOCKET_URL || '';
       this.ws = new WebSocket(`${wsUrl}?token=${token}`);
 

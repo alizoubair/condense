@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   DocumentTextIcon,
   CloudArrowUpIcon,
@@ -78,7 +78,7 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="h-full flex flex-col space-y-6">
       {/* Welcome */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Welcome back!</h1>
@@ -113,7 +113,7 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Documents */}
-      <div className="card">
+      <div className="card flex-1 min-h-0">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-medium text-gray-900">Recent Documents</h2>
           <a

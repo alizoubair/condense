@@ -35,10 +35,12 @@ export default function Layout({ children }: LayoutProps) {
         />
 
         <main className="flex-1 overflow-y-auto">
-          <div className="py-6">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="rounded-lg p-6 bg-white">
-                {children}
+          <div className="h-full">
+            <div className="h-full px-4 sm:px-6 lg:px-8 py-6">
+              <div className="h-full rounded-lg bg-white">
+                <div className="h-full p-6">
+                  {children}
+                </div>
               </div>
             </div>
           </div>
