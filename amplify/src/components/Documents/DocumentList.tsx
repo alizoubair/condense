@@ -44,11 +44,19 @@ export default function DocumentList({ onDocumentSelect, refreshTrigger }: Docum
     }
 
     try {
+      console.log('Attempting to delete document:', documentId);
       await documentApi.deleteDocument(documentId);
+      console.log('Delete successful for document:', documentId);
       setDocuments(prev => prev.filter(doc => doc.document_id !== documentId));
     } catch (err) {
       console.error('Delete failed:', err);
-      alert('Failed to delete document');
+      console.error('Error details:', {
+        message: err instanceof Error ? err.message : 'Unknown error',
+        response: (err as any)?.response,
+        status: (err as any)?.response?.status,
+        data: (err as any)?.response?.data
+      });
+      alert(`Failed to delete document: ${err instanceof Error ? err.message : 'Unknown error'}`);
     }
   };
 
