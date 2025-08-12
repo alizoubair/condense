@@ -9,6 +9,8 @@ import Dashboard from './pages/Dashboard';
 import Documents from './pages/Documents';
 import Upload from './pages/Upload';
 import Chat from './pages/Chat';
+import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 
 function App() {
   // Check if we have real AWS configuration
@@ -31,7 +33,8 @@ function App() {
             <Route path="/documents" element={<Documents />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/settings" element={<div>Settings coming soon...</div>} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>
@@ -49,7 +52,8 @@ function App() {
             <Route path="/documents" element={<Documents />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/chat" element={<Chat />} />
-            <Route path="/settings" element={<div>Settings coming soon...</div>} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Layout>

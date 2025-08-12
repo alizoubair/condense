@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchAuthSession } from 'aws-amplify/auth';
-import { Document, DocumentStatus } from '../types';
+import { Document, DocumentStatus, UserProfile, UserStats } from '../types';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || '';
 
@@ -67,6 +67,27 @@ export const documentApi = {
   getDocumentStatus: async (documentId: string): Promise<DocumentStatus> => {
     const response = await apiClient.get(`/documents/${documentId}/status`);
     return response.data;
+  },
+};
+
+// Profile API
+export const profileApi = {
+  // Get user profile
+  getProfile: async (): Promise<UserProfile> => {
+    const response = await apiClient.get('/profile');
+    return response.data.profile;
+  },
+
+  // Update user profile
+  updateProfile: async (profileData: Partial<UserProfile>): Promise<UserProfile> => {
+    const response = await apiClient.put('/profile', profileData);
+    return response.data.profile;
+  },
+
+  // Create user profile
+  createProfile: async (profileData: Partial<UserProfile>): Promise<UserProfile> => {
+    const response = await apiClient.post('/profile', profileData);
+    return response.data.profile;
   },
 };
 
