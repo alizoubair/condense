@@ -1,0 +1,52 @@
+{
+  "name": "condense-lambdas",
+  "version": "1.0.0",
+  "description": "TypeScript Lambda functions for Condense document summarization",
+  "scripts": {
+    "build": "tsc",
+    "build:all": "npm run build && npm run package:all",
+    "package:all": "npm run package:processing && npm run package:api && npm run package:chat",
+    "package:processing": "npm run package:text-extractor && npm run package:text-chunker && npm run package:embeddings-generator && npm run package:summarizer && npm run package:status-updater && npm run package:sqs-processor",
+    "package:api": "npm run package:upload-handler && npm run package:list-handler && npm run package:get-handler && npm run package:delete-handler && npm run package:status-handler && npm run package:profile-handler",
+    "package:chat": "npm run package:chat-connect && npm run package:chat-disconnect && npm run package:chat-message && npm run package:chat-default && npm run package:chat-authorizer",
+    "package:text-extractor": "mkdir -p packages && cd dist && zip -r ../packages/text-extractor.zip text-extractor/",
+    "package:text-chunker": "mkdir -p packages && cd dist && zip -r ../packages/text-chunker.zip text-chunker/",
+    "package:embeddings-generator": "mkdir -p packages && cd dist && zip -r ../packages/embeddings-generator.zip embeddings-generator/",
+    "package:summarizer": "mkdir -p packages && cd dist && zip -r ../packages/summarizer.zip summarizer/",
+    "package:status-updater": "mkdir -p packages && cd dist && zip -r ../packages/status-updater.zip status-updater/",
+    "package:sqs-processor": "mkdir -p packages && cd dist && zip -r ../packages/sqs-processor.zip sqs-processor/",
+    "package:upload-handler": "mkdir -p packages && cd dist && zip -r ../packages/upload-handler.zip upload-handler/",
+    "package:list-handler": "mkdir -p packages && cd dist && zip -r ../packages/list-handler.zip list-handler/",
+    "package:get-handler": "mkdir -p packages && cd dist && zip -r ../packages/get-handler.zip get-handler/",
+    "package:delete-handler": "mkdir -p packages && cd dist && zip -r ../packages/delete-handler.zip delete-handler/",
+    "package:status-handler": "mkdir -p packages && cd dist && zip -r ../packages/status-handler.zip status-handler/",
+    "package:profile-handler": "mkdir -p packages && cd dist && zip -r ../packages/profile-handler.zip profile-handler/",
+    "package:chat-connect": "mkdir -p packages && cd dist && zip -r ../packages/chat-connect.zip chat-connect/",
+    "package:chat-disconnect": "mkdir -p packages && cd dist && zip -r ../packages/chat-disconnect.zip chat-disconnect/",
+    "package:chat-message": "mkdir -p packages && cd dist && zip -r ../packages/chat-message.zip chat-message/",
+    "package:chat-default": "mkdir -p packages && cd dist && zip -r ../packages/chat-default.zip chat-default/",
+    "package:chat-authorizer": "mkdir -p packages && cd dist && cp -r ../node_modules chat-authorizer/ && zip -r ../packages/chat-authorizer.zip chat-authorizer/ && rm -rf chat-authorizer/node_modules"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.490.0",
+    "@aws-sdk/client-dynamodb": "^3.490.0",
+    "@aws-sdk/client-opensearch": "^3.490.0",
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.490.0",
+    "@aws-sdk/client-s3": "^3.490.0",
+    "@aws-sdk/client-sqs": "^3.490.0",
+    "@aws-sdk/client-sfn": "^3.490.0",
+    "@aws-sdk/client-textract": "^3.490.0",
+    "@aws-sdk/lib-dynamodb": "^3.490.0",
+    "@aws-sdk/util-dynamodb": "^3.490.0",
+    "@aws-sdk/credential-provider-node": "^3.490.0",
+    "@opensearch-project/opensearch": "^2.5.0",
+    "aws-jwt-verify": "^4.0.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.131",
+    "@types/node": "^20.10.6",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.3"
+  }
+}
