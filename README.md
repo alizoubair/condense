@@ -157,7 +157,6 @@ npm run package:chat       # Package only chat functions
 - **Lambda** - Serverless compute for all backend logic
 - **DynamoDB** - Document metadata and chat history storage
 - **S3** - Document and vector storage
-- **OpenSearch** - Document search and retrieval
 - **Bedrock** - AI models for embeddings and summarization
 - **Cognito** - User authentication and authorization
 - **SQS** - Asynchronous document processing queue
@@ -191,10 +190,47 @@ npm run package:chat       # Package only chat functions
 
 ## 📈 Monitoring
 
-The application includes built-in monitoring through:
-- CloudWatch Logs for all Lambda functions
-- CloudWatch Metrics for performance monitoring
-- X-Ray tracing for distributed request tracking
+### 🤖 Bedrock Model Invocation Logging
+
+Condense includes comprehensive logging for all Amazon Bedrock model invocations to provide visibility into AI model usage, performance, and costs.
+
+#### Infrastructure
+The logging infrastructure is automatically deployed via Terraform and includes:
+- CloudWatch Log Group: `/aws/bedrock/modelinvocations`
+- IAM Role for Bedrock logging permissions
+- Model invocation logging configuration with text, embedding, and image data delivery
+
+#### Querying Logs with CloudWatch Logs Insights
+
+Use this query to analyze chat interactions and model usage:
+
+```sql
+fields @timestamp, @message
+| parse @message /"operation":"(?<operation>[^"]*)"/
+| parse @message /"modelId":"(?<modelId>[^"]*)"/
+| parse @message /"inputText":"(?<prompt>[^"]*)"/
+| filter ispresent(operation) and ispresent(prompt) and @message like /condense-dev-chat-message/
+| sort @timestamp desc
+```
+
+This query extracts:
+- **operation** - The Bedrock operation (InvokeModel, etc.)
+- **modelId** - Which AI model was used (Claude, Titan, etc.)
+- **prompt** - The actual user question or input text
+- Filters to show only chat-related model invocations
+
+#### Dashboard Screenshot
+
+![Bedrock Monitoring Dashboard](docs/images/bedrock-dashboard.png)
+
+*CloudWatch Dashboard showing the number of invocations over time by model, invocation latency by model, token count by input & output, and latest prompts from model invocation logs.*
+
+In dashboard above we are showing the following information:
+
+- The number of invocations over time by model
+- Invocation latency by model
+- Token count by input and output tokens
+- The latest prompts from the invocation logs showing the model, operation, input and output token count
 
 ## 🚀 Deployment
 
