@@ -224,8 +224,8 @@ resource "aws_lambda_function" "delete_handler" {
 
   environment {
     variables = {
-      DOCUMENTS_TABLE     = var.documents_table_name
-      DOCUMENTS_BUCKET    = var.documents_bucket_name
+      DOCUMENTS_TABLE  = var.documents_table_name
+      DOCUMENTS_BUCKET = var.documents_bucket_name
     }
   }
 

@@ -1,9 +1,9 @@
-# S3 bucket for vector storage with vector search capabilities
+# S3 bucket for vector storage
 resource "aws_s3_bucket" "vectors" {
-  bucket = "${var.project_name}-${var.environment}-vectors-${random_id.bucket_suffix.hex}"
+  bucket        = "${var.project_name}-${var.environment}-vectors-${random_id.bucket_suffix.hex}"
   force_destroy = true
-  
-  tags   = var.common_tags
+
+  tags = var.common_tags
 }
 
 # Random suffix for bucket name uniqueness

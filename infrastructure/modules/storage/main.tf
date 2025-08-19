@@ -1,13 +1,13 @@
 # S3 Buckets
 resource "aws_s3_bucket" "documents" {
-  bucket = "${var.project_name}-${var.environment}-documents-${random_id.bucket_suffix.hex}"
+  bucket        = "${var.project_name}-${var.environment}-documents-${random_id.bucket_suffix.hex}"
   force_destroy = true
 
   tags = var.common_tags
 }
 
 resource "aws_s3_bucket" "processed_documents" {
-  bucket = "${var.project_name}-${var.environment}-processed-${random_id.bucket_suffix.hex}"
+  bucket        = "${var.project_name}-${var.environment}-processed-${random_id.bucket_suffix.hex}"
   force_destroy = true
 
   tags = var.common_tags

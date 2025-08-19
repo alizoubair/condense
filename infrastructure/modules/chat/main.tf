@@ -1,7 +1,7 @@
 # WebSocket API Gateway
 resource "aws_apigatewayv2_api" "chat" {
   name                       = "${var.project_name}-${var.environment}-chat"
-  protocol_type             = "WEBSOCKET"
+  protocol_type              = "WEBSOCKET"
   route_selection_expression = "$request.body.action"
 
   tags = var.common_tags
@@ -16,9 +16,9 @@ resource "aws_apigatewayv2_stage" "chat" {
   default_route_settings {
     data_trace_enabled       = true
     detailed_metrics_enabled = true
-    logging_level           = "INFO"
-    throttling_burst_limit  = 100
-    throttling_rate_limit   = 50
+    logging_level            = "INFO"
+    throttling_burst_limit   = 100
+    throttling_rate_limit    = 50
   }
 
   tags = var.common_tags
@@ -30,11 +30,11 @@ resource "aws_lambda_function" "connect_handler" {
   filename         = "${path.root}/../lambda/packages/chat-connect.zip"
   source_code_hash = filebase64sha256("${path.root}/../lambda/packages/chat-connect.zip")
   function_name    = "${var.project_name}-${var.environment}-chat-connect"
-  role            = aws_iam_role.chat_lambda_role.arn
-  handler         = "index.handler"
-  runtime         = "nodejs20.x"
-  timeout         = 30
-  memory_size     = 256
+  role             = aws_iam_role.chat_lambda_role.arn
+  handler          = "index.handler"
+  runtime          = "nodejs20.x"
+  timeout          = 30
+  memory_size      = 256
 
   environment {
     variables = {
@@ -50,11 +50,11 @@ resource "aws_lambda_function" "disconnect_handler" {
   filename         = "${path.root}/../lambda/packages/chat-disconnect.zip"
   source_code_hash = filebase64sha256("${path.root}/../lambda/packages/chat-disconnect.zip")
   function_name    = "${var.project_name}-${var.environment}-chat-disconnect"
-  role            = aws_iam_role.chat_lambda_role.arn
-  handler         = "index.handler"
-  runtime         = "nodejs20.x"
-  timeout         = 30
-  memory_size     = 256
+  role             = aws_iam_role.chat_lambda_role.arn
+  handler          = "index.handler"
+  runtime          = "nodejs20.x"
+  timeout          = 30
+  memory_size      = 256
 
   environment {
     variables = {
@@ -70,11 +70,11 @@ resource "aws_lambda_function" "message_handler" {
   filename         = "${path.root}/../lambda/packages/chat-message.zip"
   source_code_hash = filebase64sha256("${path.root}/../lambda/packages/chat-message.zip")
   function_name    = "${var.project_name}-${var.environment}-chat-message"
-  role            = aws_iam_role.chat_lambda_role.arn
-  handler         = "index.handler"
-  runtime         = "nodejs20.x"
-  timeout         = 300
-  memory_size     = 1024
+  role             = aws_iam_role.chat_lambda_role.arn
+  handler          = "index.handler"
+  runtime          = "nodejs20.x"
+  timeout          = 300
+  memory_size      = 1024
 
   environment {
     variables = {
@@ -94,11 +94,11 @@ resource "aws_lambda_function" "default_handler" {
   filename         = "${path.root}/../lambda/packages/chat-default.zip"
   source_code_hash = filebase64sha256("${path.root}/../lambda/packages/chat-default.zip")
   function_name    = "${var.project_name}-${var.environment}-chat-default"
-  role            = aws_iam_role.chat_lambda_role.arn
-  handler         = "index.handler"
-  runtime         = "nodejs20.x"
-  timeout         = 30
-  memory_size     = 256
+  role             = aws_iam_role.chat_lambda_role.arn
+  handler          = "index.handler"
+  runtime          = "nodejs20.x"
+  timeout          = 30
+  memory_size      = 256
 
   tags = var.common_tags
 }
@@ -108,11 +108,11 @@ resource "aws_lambda_function" "authorizer_handler" {
   filename         = "${path.root}/../lambda/packages/chat-authorizer.zip"
   source_code_hash = filebase64sha256("${path.root}/../lambda/packages/chat-authorizer.zip")
   function_name    = "${var.project_name}-${var.environment}-chat-authorizer"
-  role            = aws_iam_role.chat_lambda_role.arn
-  handler         = "index.handler"
-  runtime         = "nodejs20.x"
-  timeout         = 30
-  memory_size     = 256
+  role             = aws_iam_role.chat_lambda_role.arn
+  handler          = "index.handler"
+  runtime          = "nodejs20.x"
+  timeout          = 30
+  memory_size      = 256
 
   environment {
     variables = {
@@ -150,7 +150,7 @@ resource "aws_apigatewayv2_route" "connect" {
   target    = "integrations/${aws_apigatewayv2_integration.connect.id}"
 
   authorization_type = "CUSTOM"
-  authorizer_id     = aws_apigatewayv2_authorizer.chat_authorizer.id
+  authorizer_id      = aws_apigatewayv2_authorizer.chat_authorizer.id
 }
 
 resource "aws_apigatewayv2_integration" "connect" {

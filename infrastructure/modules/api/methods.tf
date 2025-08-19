@@ -289,8 +289,8 @@ resource "aws_api_gateway_integration" "get_profile" {
   http_method = aws_api_gateway_method.get_profile.http_method
 
   integration_http_method = "POST"
-  type                   = "AWS_PROXY"
-  uri                    = aws_lambda_function.profile_handler.invoke_arn
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.profile_handler.invoke_arn
 }
 
 resource "aws_lambda_permission" "get_profile" {
@@ -316,8 +316,8 @@ resource "aws_api_gateway_integration" "update_profile" {
   http_method = aws_api_gateway_method.update_profile.http_method
 
   integration_http_method = "POST"
-  type                   = "AWS_PROXY"
-  uri                    = aws_lambda_function.profile_handler.invoke_arn
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.profile_handler.invoke_arn
 }
 
 resource "aws_lambda_permission" "update_profile" {
@@ -343,8 +343,8 @@ resource "aws_api_gateway_integration" "create_profile" {
   http_method = aws_api_gateway_method.create_profile.http_method
 
   integration_http_method = "POST"
-  type                   = "AWS_PROXY"
-  uri                    = aws_lambda_function.profile_handler.invoke_arn
+  type                    = "AWS_PROXY"
+  uri                     = aws_lambda_function.profile_handler.invoke_arn
 }
 
 resource "aws_lambda_permission" "create_profile" {
