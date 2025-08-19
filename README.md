@@ -219,7 +219,7 @@ This query extracts:
 - **prompt** - The actual user question or input text
 - Filters to show only chat-related model invocations
 
-#### Dashboard Screenshot
+#### CloudWatch Dashboard
 
 ![Bedrock Monitoring Dashboard](docs/images/bedrock-dashboard.png)
 
